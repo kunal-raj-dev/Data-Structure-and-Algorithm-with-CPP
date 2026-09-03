@@ -41,6 +41,31 @@ void insertionSort_while(int arr[] , int n) {
     printArray(arr , n);
 }
 
+// optimized code
+
+// OPTIMIZED INSERTION SORT APPROACH (Shift Method)
+// Time Complexity : O(n^2) Worst/Average, O(n) Best Case
+// Space Complexity : O(1)
+
+void insertionSortOptimized(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        // STEP 1: Lift the target element completely out of the array
+        int temp = arr[i]; 
+        int j = i - 1;
+
+        // STEP 2: Shift larger elements one space to the right
+        // We do not swap! We just copy the left value into the right slot.
+        while (j >= 0 && arr[j] > temp) {
+            arr[j + 1] = arr[j]; 
+            j--;
+        }
+        
+        // STEP 3: Drop the temp value into the gap we created
+        arr[j + 1] = temp; 
+    }
+}
+
+
 
 
 int main(){
@@ -49,6 +74,9 @@ int main(){
 
     insertionSort(arr,n);
     insertionSort_while(arr,n);
+
+    insertionSortOptimized(arr, n);
+    printArray(arr , n);
     
 
     return 0;
